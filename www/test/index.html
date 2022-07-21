@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h5>奇迹科技 後端工程師-前測試題</h5>
+    <center><h2>佈告欄</h2></center>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <center>
+    <div>
+    <form action="search_sender.php" method="GET">
+      <input type="text" placeholder="key word" name="sender" required>
+      <button type="submit" name="submit">查詢姓名</button>
+    </form>
+    </div>
+    <br>
+    <div>
+    <form action="search_content.php" method="GET">
+      <input type="text" placeholder="key word" name="content" required>
+      <button type="submit" name="submit">查詢內容</button>
+    </form>
+    </div>
+    <table id="list" border="1" cellspacing="0" style="margin-top:20px;">  
+      <tr>  
+        <th>編號</th>  
+        <th>發布者</th>  
+        <th>內容</th>  
+        <th class="content">時間</th>  
+        <th>操作</th>  
+      </tr>   
+    <table>  
+    <br>
+    <form action="send_message.php" method="GET">    
+      <input type="text" name="sender" placeholder="my name" required><br><br>
+      <textarea rows="5" cols="22" name="content" placeholder="text" required></textarea>  <br>
+      <button type="submit">發送</button>  
+    </form>  
+    </center>
+    <center>
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.js"></script>
+    <script>
+        $.get('main.php',function(data){
+            data = JSON.parse(data).data;
+            var html = '';
+            $(data).each(function(index,item){
+                html+= `
+                    <tr>  
+                      <td>${item.id}</td>  
+                      <td>${item.sender}</td>  
+                      <td>${item.content}</td>  
+                      <td>${item.send_time}</td>  
+                      <td>  
+                      <a href="update.php?id=${item.id}"><button>修改佈告</button></a>  
+                      <a href="del.php?id=${item.id}"><button>刪除佈告</button></a>  
+                      </td>  
+                    </tr> 
+                `;
+            });
+            
+            $('#list').append(html);
+        });
+    </script>
+    </center>
+</body>
+</html>
