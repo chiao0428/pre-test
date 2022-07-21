@@ -11,3 +11,7 @@ php -S localhost:8000
 開啟瀏覽器:http://localhost:8000
 
 即可看到初始畫面
+
+[STEP3]
+
+程式碼存放路徑:www/test
